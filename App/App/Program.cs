@@ -1,18 +1,27 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using System.Runtime.CompilerServices;
+using Microsoft.Extensions.Configuration;
+using Microsoft.VisualBasic;
 
 namespace App;
 
 class Program
 {
+    public Dictionary<string, Markets> markets = new Dictionary<string, Markets>();
     
     static void Main(string[] args)
     {
-        var config = getConfig();
-        
-        Console.WriteLine($"Time: {config["MySettings:Time"].ToString()}");
-        Console.ReadKey(true);
+        GetToMarket();
     }
 
+    static void GetToMarket()
+    {
+        var config = getConfig();
+        
+        config.GetSection("Appsettings").Bind("Marketplace", "Local");
+        
+        
+    }
+    
     private static dynamic getConfig()
     {
         var config = new ConfigurationBuilder()
@@ -21,5 +30,10 @@ class Program
             .Build();
         
         return config;
+    }
+
+    private void AddMarkets(string Name, double price = 0.0)
+    {
+        markets.Add(Name, new Markets(Name, price));
     }
 }
