@@ -1,6 +1,9 @@
 ﻿FROM mcr.microsoft.com/dotnet/runtime:8.0 AS base
 USER $APP_UID
 WORKDIR /app
+# Install any needed packages specified in requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
+
 
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
