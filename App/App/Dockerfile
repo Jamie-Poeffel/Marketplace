@@ -1,9 +1,6 @@
 ﻿FROM mcr.microsoft.com/dotnet/runtime:8.0 AS base
 USER $APP_UID
 WORKDIR /app
-# Install any needed packages specified in requirements.txt
-RUN pip install --no-cache-dir -r requirements.txt
-
 
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
@@ -11,8 +8,10 @@ WORKDIR /src
 COPY ["App/App.csproj", "App/"]
 RUN dotnet restore "App/App.csproj"
 COPY . .
+
 WORKDIR "/src/App"
 RUN dotnet build "App.csproj" -c $BUILD_CONFIGURATION -o /app/build
+
 
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
