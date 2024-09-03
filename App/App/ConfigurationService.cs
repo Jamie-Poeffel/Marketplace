@@ -24,6 +24,7 @@ public class ConfigurationService
     private void LoadConfiguration()
     {
         _configuration = new ConfigurationBuilder()
+            .SetBasePath(Directory.GetCurrentDirectory())
             .AddJsonFile(_filePath, optional: false, reloadOnChange: false)
             .Build();
     }
