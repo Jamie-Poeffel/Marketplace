@@ -15,7 +15,7 @@ class Program
     static void Main(string[] args)
     {
         var config = GetConect();
-        Get2FA(config);
+        // Get2FA(config);
         
         Interaction.Client.StartClient();
         

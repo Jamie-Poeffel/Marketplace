@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using System.Net.Sockets;
 using System.Text;
 
@@ -16,9 +17,11 @@ public class Client
         {
             // Create a TcpClient and connect to the server
             TcpClient client = new TcpClient(ServerIp, Port);
+            client.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.KeepAlive, true);
             Console.WriteLine("Connected to server.");
 
             NetworkStream stream = client.GetStream();
+
 
             // Send data to the server
             string message = "GETMarkt";
@@ -26,15 +29,15 @@ public class Client
             stream.Write(data, 0, data.Length);
 
             // Receive data from the server
-            do
+            while (stream.DataAvailable || message == "GETMarkt")
             {
                 byte[] responseData = new byte[1024];
                 int bytes = stream.Read(responseData, 0, responseData.Length);
                 string response = Encoding.ASCII.GetString(responseData, 0, bytes);
-                
                 Program.markets.Add(response.Split(',').First(), new Markets(response.Split(',').First(), Convert.ToDouble(response.Split(',').Last())));
-                
-            }while (stream.DataAvailable);
+                message = "";
+            }
+            
 
             // Close everything
             stream.Close();

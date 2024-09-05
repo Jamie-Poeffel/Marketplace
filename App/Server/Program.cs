@@ -84,7 +84,6 @@ class Program
                     {
                         byte[] response = Encoding.ASCII.GetBytes($"{market.Marketname},{market.CurrontPrice}");
                         stream.Write(response, 0, response.Length);
-                        Thread.Sleep(200);
                     }
                     // Respond to client
                 }
