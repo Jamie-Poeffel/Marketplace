@@ -23,7 +23,8 @@ class Program
 
         do
         {
-            Console.WriteLine("Code: ");
+            
+            Console.Write("\nCode: ");
         } while ((Console.ReadLine() != code));
 
         Console.WriteLine("2FA Erfolgreich");
