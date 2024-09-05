@@ -16,17 +16,14 @@ class Program
     {
         var config = GetConect();
         Get2FA(config);
+        
+        Interaction.Client.StartClient();
+        
         GetToMarket(config);
     }
 
     static void GetToMarket(IConfiguration config)
     {
-        Markets market = new Markets("IPHONE", 0.0);
-        Markets market1 = new Markets("Apple", 0.0);
-        
-        markets.Add("Iphone", market);
-        markets.Add("Apple", market1);
-        
         Print(markets);
     }
 
