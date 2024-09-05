@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.Diagnostics;
 using System.Net;
 using System.Runtime.CompilerServices;
 using Microsoft.Extensions.Configuration;
@@ -9,25 +10,24 @@ namespace App;
 
 class Program
 {
-    public Dictionary<string, Markets> markets = new Dictionary<string, Markets>();
+    public static Dictionary<string, Markets> markets = new Dictionary<string, Markets>();
 
     static void Main(string[] args)
     {
         var config = GetConect();
+        Get2FA(config);
         GetToMarket(config);
     }
 
-    static async void GetToMarket(IConfiguration config)
+    static void GetToMarket(IConfiguration config)
     {
-        string code = await Email.Email.SendEmail(config, "Jamie.poeffel@gmail.com");
-
-        do
-        {
-            
-            Console.Write("\nCode: ");
-        } while ((Console.ReadLine() != code));
-
-        Console.WriteLine("2FA Erfolgreich");
+        Markets market = new Markets("IPHONE", 0.0);
+        Markets market1 = new Markets("Apple", 0.0);
+        
+        markets.Add("Iphone", market);
+        markets.Add("Apple", market1);
+        
+        Print(markets);
     }
 
     private void AddMarkets(string Name, double price = 0.0)
@@ -43,5 +43,33 @@ class Program
             .Build();
     }
 
-   
+    private static async void Get2FA(IConfiguration config)
+    {
+        string code = await Email.Email.SendEmail(config, "Jamie.poeffel@gmail.com");
+
+        do
+        {
+            Console.Write("\nCode: ");
+        } while ((Console.ReadLine() != code));
+
+        Console.WriteLine("2FA Erfolgreich");
+    }
+
+    private static void Print(Dictionary<string, Markets> markets)
+    {
+        Console.Clear();
+        // Sortiere das Dictionary nach dem Key (string)
+        var sortedMarkets = markets.OrderBy(m => m.Key);
+
+        // Überschriften der Tabelle ausgeben
+        Console.WriteLine($"{"MarketName",-20} {"CurrentPrice",-20}");
+
+        // Werte ausgeben
+        foreach (var market in sortedMarkets)
+        {
+            // Jede Zeile besteht aus dem MarketName und dem CurrentPrice
+            Console.WriteLine($"{market.Value.Marketname,-20} {market.Value.CurrontPrice,-20}");
+        }
+    }
+
 }
