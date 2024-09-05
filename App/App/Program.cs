@@ -42,7 +42,8 @@ class Program
 
     private static async void Get2FA(IConfiguration config)
     {
-        string code = await Email.Email.SendEmail(config, "Jamie.poeffel@gmail.com");
+        Console.Write("Enter email: ");
+        string code = await Email.Email.SendEmail(config, Console.ReadLine());
 
         do
         {
