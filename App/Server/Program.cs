@@ -3,6 +3,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Reflection.PortableExecutable;
 using System.Text;
+using Server.Data;
 
 namespace Server;
 
@@ -87,6 +88,27 @@ class Program
                     }
                     // Respond to client
                 }
+                else
+                {
+                    if (data.Split('?').First() == "LoginUser")
+                    {
+                        byte[] response;
+                        if (LoginUser(data))
+                        {
+                            response = Encoding.ASCII.GetBytes($"LoginResult?=true");
+                        }
+                        else
+                        {
+                            response = Encoding.ASCII.GetBytes($"LoginResult?=false");
+                        }
+                        
+                        stream.Write(response, 0, response.Length);
+                    }
+                    else if (data.Split('?').First() == "CreateUser")
+                    {
+                        AddUser(data);
+                    }
+                }
 
                 Console.WriteLine("Sent back a response to the client.");
             }
@@ -101,5 +123,15 @@ class Program
             client.Close();
             Console.WriteLine("Client disconnected.");
         }
+    }
+
+    private static bool LoginUser(string data)
+    {
+        return false;
+    }
+
+    private static void AddUser(string data)
+    {
+        
     }
 }

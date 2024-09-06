@@ -10,11 +10,12 @@ namespace App;
 
 class Program
 {
+    public static IConfiguration config;
     public static Dictionary<string, Markets> markets = new Dictionary<string, Markets>();
 
     static void Main(string[] args)
     {
-        var config = GetConect();
+        config = GetConect();
         Get2FA(config);
         
         Interaction.Client.StartClient();
