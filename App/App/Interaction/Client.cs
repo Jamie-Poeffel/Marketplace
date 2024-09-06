@@ -2,6 +2,7 @@
 using System.Data;
 using System.Net.Sockets;
 using System.Text;
+using App.Interaction.Login;
 
 namespace App.Interaction;
 
@@ -21,7 +22,22 @@ public class Client
             Console.WriteLine("Connected to server.");
 
             NetworkStream stream = client.GetStream();
-
+            
+            Login.CreateUser user = new Login.CreateUser();
+            if (!user.createNew)
+            {
+                Login.Login login = new Login.Login();
+                
+                string message2 = $"LoginUser?={login.Username},{login.Password}";
+                byte[] data2 = Encoding.ASCII.GetBytes(message2);
+                stream.Write(data2, 0, data2.Length);
+            }
+            else
+            {
+                string message1 = $"CreateUser?={user.emailAddress},{user.Username},{user.password}";
+                byte[] data1 = Encoding.ASCII.GetBytes(message1);
+                stream.Write(data1, 0, data1.Length);
+            }
 
             // Send data to the server
             string message = "GETMarkt";
