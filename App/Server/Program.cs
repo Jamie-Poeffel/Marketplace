@@ -127,11 +127,20 @@ class Program
 
     private static bool LoginUser(string data)
     {
+        var dat = data.Split('=').Last();
+        var sp = dat.Split(',');
+        if (DatabaseAccess.CheckUser(sp[0], sp[1]))
+        {
+            return true;
+        }
         return false;
     }
 
     private static void AddUser(string data)
     {
+        var dat  = data.Split('=').Last();
+        var sp = dat.Split(',');
         
+        DatabaseAccess.addUser(sp[0], sp[1], sp[2]);
     }
 }

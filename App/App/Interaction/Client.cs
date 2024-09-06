@@ -34,7 +34,7 @@ public class Client
             }
             else
             {
-                string message1 = $"CreateUser?={user.emailAddress},{user.Username},{user.password}";
+                string message1 = $"CreateUser?={user.Username},{user.password},{user.emailAddress}";
                 byte[] data1 = Encoding.ASCII.GetBytes(message1);
                 stream.Write(data1, 0, data1.Length);
             }
