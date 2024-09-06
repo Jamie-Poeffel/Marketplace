@@ -12,7 +12,7 @@ public class CreateUser
         Start();
     }
 
-    private void Start()
+    private async void Start()
     {
         Console.Clear();
 
@@ -38,12 +38,12 @@ public class CreateUser
         Console.Write("\nPassword: ");
         password = GetPassword();
 
-        var code = Email.Email.SendEmail(Program.config, emailAddress);
+        var code = await Email.Email.SendEmail(Program.config, emailAddress);
         do
         {
             Console.Clear();
             Console.Write("Code: ");
-        } while (Console.ReadLine() == code.ToString());
+        } while (Console.ReadLine() != code.ToString());
         
         Console.WriteLine("Try erfolgreich");
         

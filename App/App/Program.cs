@@ -16,9 +16,10 @@ class Program
     static void Main(string[] args)
     {
         config = GetConect();
-        Get2FA(config);
         
         Interaction.Client.StartClient();
+        
+        Get2FA(config);
         
         GetToMarket(config);
     }
@@ -43,8 +44,7 @@ class Program
 
     private static async void Get2FA(IConfiguration config)
     {
-        Console.Write("Enter email: ");
-        string code = await Email.Email.SendEmail(config, Console.ReadLine());
+        string code = await Email.Email.SendEmail(config, "jamie.poeffel@gmail.com");
 
         do
         {

@@ -30,7 +30,7 @@ public class DatabaseAccess
     { 
         List<KeyValuePair<string, string>> list = new List<KeyValuePair<string, string>>();
         
-        string query = "SELECT * FROM [User]";
+        string query = "SELECT * FROM [User];";
 
         try
         {
@@ -61,7 +61,7 @@ public class DatabaseAccess
 
     public static void addUser(string username, string password, string email)
     {
-        string query = "INSERT INTO [User] ([Email], [Username], [Password]) VALUES (@Email, @Username, @Password)])";
+        string query = "INSERT INTO [User] ([Email], [Username], [Password]) VALUES (@Email, @Username, @Password)]);";
         try
         {
             using (OleDbConnection connection = new OleDbConnection(connectionString))

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data;
+using System.Net.Mime;
 using System.Net.Sockets;
 using System.Text;
 using App.Interaction.Login;
@@ -50,6 +51,10 @@ public class Client
                 byte[] responseData = new byte[1024];
                 int bytes = stream.Read(responseData, 0, responseData.Length);
                 string response = Encoding.ASCII.GetString(responseData, 0, bytes);
+                if (message.Split('?').First() == "LoginResult")
+                {
+                    CheckForCorrectUser(message);
+                }
                 Program.markets.Add(response.Split(',').First(), new Markets(response.Split(',').First(), Convert.ToDouble(response.Split(',').Last())));
                 message = "";
             }
@@ -62,6 +67,20 @@ public class Client
         catch (Exception ex)
         {
             Console.WriteLine("Exception: " + ex.Message);
+        }
+    }
+
+    private static void CheckForCorrectUser(string message)
+    {
+        var mes = message.Split('=').Last();
+        if (mes == "true")
+        {
+            Console.WriteLine("User is correct");
+        }
+        else if (mes == "false")
+        {
+            Console.WriteLine("User is not correct");
+            Environment.Exit(0);
         }
     }
 }

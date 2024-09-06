@@ -13,3 +13,14 @@ C:\Users\jamie\OneDrive - sluz\Learning\GitClones\Marketplace\Marketplace\App\Se
 C:\Users\jamie\OneDrive - sluz\Learning\GitClones\Marketplace\Marketplace\App\Server\obj\Debug\net8.0\Server.pdb
 C:\Users\jamie\OneDrive - sluz\Learning\GitClones\Marketplace\Marketplace\App\Server\obj\Debug\net8.0\Server.genruntimeconfig.cache
 C:\Users\jamie\OneDrive - sluz\Learning\GitClones\Marketplace\Marketplace\App\Server\obj\Debug\net8.0\ref\Server.dll
+C:\Users\jamie\OneDrive - sluz\Learning\GitClones\Marketplace\Marketplace\App\Server\bin\Debug\net8.0\System.Configuration.ConfigurationManager.dll
+C:\Users\jamie\OneDrive - sluz\Learning\GitClones\Marketplace\Marketplace\App\Server\bin\Debug\net8.0\System.Data.OleDb.dll
+C:\Users\jamie\OneDrive - sluz\Learning\GitClones\Marketplace\Marketplace\App\Server\bin\Debug\net8.0\System.Diagnostics.EventLog.dll
+C:\Users\jamie\OneDrive - sluz\Learning\GitClones\Marketplace\Marketplace\App\Server\bin\Debug\net8.0\System.Diagnostics.PerformanceCounter.dll
+C:\Users\jamie\OneDrive - sluz\Learning\GitClones\Marketplace\Marketplace\App\Server\bin\Debug\net8.0\System.Security.Cryptography.ProtectedData.dll
+C:\Users\jamie\OneDrive - sluz\Learning\GitClones\Marketplace\Marketplace\App\Server\bin\Debug\net8.0\runtimes\win\lib\net8.0\System.Data.OleDb.dll
+C:\Users\jamie\OneDrive - sluz\Learning\GitClones\Marketplace\Marketplace\App\Server\bin\Debug\net8.0\runtimes\win\lib\net8.0\System.Diagnostics.EventLog.Messages.dll
+C:\Users\jamie\OneDrive - sluz\Learning\GitClones\Marketplace\Marketplace\App\Server\bin\Debug\net8.0\runtimes\win\lib\net8.0\System.Diagnostics.EventLog.dll
+C:\Users\jamie\OneDrive - sluz\Learning\GitClones\Marketplace\Marketplace\App\Server\bin\Debug\net8.0\runtimes\win\lib\net8.0\System.Diagnostics.PerformanceCounter.dll
+C:\Users\jamie\OneDrive - sluz\Learning\GitClones\Marketplace\Marketplace\App\Server\obj\Debug\net8.0\Server.csproj.AssemblyReference.cache
+C:\Users\jamie\OneDrive - sluz\Learning\GitClones\Marketplace\Marketplace\App\Server\obj\Debug\net8.0\Server.csproj.Up2Date
