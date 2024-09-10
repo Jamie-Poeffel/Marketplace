@@ -16,10 +16,10 @@ public class Login
         Console.Write("Username: ");
         Username = Console.ReadLine();
         
-        Console.Write("\n\nPassword: ");
+        Console.Write("\nPassword: ");
         var password = GetPassword();
         
-        Console.WriteLine("\n Ist ihr eingegebenes login korrekt (y\\n)");
+        Console.Write("\nIst ihr eingegebenes login korrekt (y\\n)");
         switch (Console.ReadLine().ToLower())
         {
             case "n":

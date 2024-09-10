@@ -19,7 +19,7 @@ class Program
         
         Interaction.Client.StartClient();
         
-        Get2FA(config);
+        // Get2FA(config);
         
         GetToMarket(config);
     }

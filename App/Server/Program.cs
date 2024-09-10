@@ -83,7 +83,7 @@ class Program
                 {
                     foreach (Markets market in markets)
                     {
-                        byte[] response = Encoding.ASCII.GetBytes($"{market.Marketname},{market.CurrontPrice}");
+                        byte[] response = Encoding.ASCII.GetBytes($"MARKT?={market.Marketname},{market.CurrontPrice}\n");
                         stream.Write(response, 0, response.Length);
                     }
                     // Respond to client
@@ -95,11 +95,11 @@ class Program
                         byte[] response;
                         if (LoginUser(data))
                         {
-                            response = Encoding.ASCII.GetBytes($"LoginResult?=true");
+                            response = Encoding.ASCII.GetBytes($"LoginResult?=true\n");
                         }
                         else
                         {
-                            response = Encoding.ASCII.GetBytes($"LoginResult?=false");
+                            response = Encoding.ASCII.GetBytes($"LoginResult?=false\n");
                         }
                         
                         stream.Write(response, 0, response.Length);

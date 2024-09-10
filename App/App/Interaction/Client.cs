@@ -9,7 +9,6 @@ namespace App.Interaction;
 
 public class Client
 {
-    
     private const string ServerIp = "127.0.0.1"; // Localhost
     private const int Port = 5000; // Must match the server port
 
@@ -23,12 +22,12 @@ public class Client
             Console.WriteLine("Connected to server.");
 
             NetworkStream stream = client.GetStream();
-            
+
             Login.CreateUser user = new Login.CreateUser();
             if (!user.createNew)
             {
                 Login.Login login = new Login.Login();
-                
+
                 string message2 = $"LoginUser?={login.Username},{login.Password}";
                 byte[] data2 = Encoding.ASCII.GetBytes(message2);
                 stream.Write(data2, 0, data2.Length);
@@ -46,19 +45,38 @@ public class Client
             stream.Write(data, 0, data.Length);
 
             // Receive data from the server
-            while (stream.DataAvailable || message == "GETMarkt")
+            while (stream.DataAvailable)
             {
                 byte[] responseData = new byte[1024];
                 int bytes = stream.Read(responseData, 0, responseData.Length);
                 string response = Encoding.ASCII.GetString(responseData, 0, bytes);
-                if (message.Split('?').First() == "LoginResult")
+                var rep = response.Split('\n');
+                foreach (var item in rep)
                 {
-                    CheckForCorrectUser(message);
-                }
-                Program.markets.Add(response.Split(',').First(), new Markets(response.Split(',').First(), Convert.ToDouble(response.Split(',').Last())));
-                message = "";
+                    switch (item.Split('?').First())
+                    {
+                        case "LoginResult":
+                        {
+                            if (!CheckForCorrectUser(item))
+                            {
+                                Login.Login login = new Login.Login();
+                                return;
+                            }
+                            break;
+                        }
+                        case "MARKT":
+                        {
+                            var repo = item.Split('=').Last();
+                            Program.markets.Add(repo.Split(',').First(),
+                                new Markets(repo.Split(',').First(), Convert.ToDouble(repo.Split(',').Last())));
+                            break;
+                        }
+                    }
+
+                } 
+                Thread.Sleep(20);
             }
-            
+
 
             // Close everything
             stream.Close();
@@ -70,17 +88,18 @@ public class Client
         }
     }
 
-    private static void CheckForCorrectUser(string message)
+    private static bool CheckForCorrectUser(string message)
     {
         var mes = message.Split('=').Last();
         if (mes == "true")
         {
-            Console.WriteLine("User is correct");
+            return true;
         }
         else if (mes == "false")
         {
-            Console.WriteLine("User is not correct");
-            Environment.Exit(0);
+            return false;
         }
+
+        return false;
     }
 }
